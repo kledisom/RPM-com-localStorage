@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Colect-RPM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="" type="image/x-icon" />
+<meta charset="utf-8" />
+<style type="text/css">
+ .flex-container { 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 50px;
+ height: 100%;
+ font-family: 'Roboto', sans-serif;
+ 
+ }
+ 
+ body {
+ //background-image: linear-gradient(to right, #000000, #0a1852);
+ background-color: #191970;
+ }
+ 
+ #titulo {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ //border: 2px solid #6A5ACD; 
+ border: 2px solid #191970;  //MidnightBlue
+ width: 100%;
+ height: 90px;
+ color: white;
+ background-color: black;
+ border-radius: 10px 0px 10px 0px;
+ }
+
+ #titulo2 {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ //border: 2px solid #6A5ACD; 
+ border: 2px solid #191970;  //MidnightBlue
+ width: 100%;
+ height: 90px;
+ color: white;
+ background-color: black;
+ margin-top: 40px;
+ border-radius: 10px 0px 10px 0px;
+ }
+ 
+ #btnExport {
+ display: flex;
+ justify-content: center;
+ border: 2px solid blue;
+ width: 100%;
+ height: 32px;
+ margin-top: 40px;
+ text-align: center;
+ border-radius: 10px;
+ 
+ }
+ 
+ #Export {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 100px;
+ height: 30px;
+ text-decoration: none; 
+ }
+ 
+ #btnSalvar {
+  margin: 10px;
+  width: 150px;
+  height: 90px;
+  font-size: 30px;
+  border-radius: 10px;
+  background-color: #D2691E;
+  color: white;
+  border: 5px solid black;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0px #999;
+ }
+  
+ table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+  width: 80%;
+  text-align: center;
+ }
+ 
+ #iRpm, #iArt {
+  border: 5px solid black;
+  height: 100px;
+  width: 200px;
+  margin-right: 50px;
+  margin-left: 50px;
+  font-size: 35px;
+  text-align: center;
+ }
+ 
+ .flex-container div h1 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 200px;
+  height: 100px;
+  font-size: 50px;
+  color: black;
+  padding: 0px; 
+  margin-left: 50px;
+    
+ }
+ #loading {
+ display: block;
+ text-align: center;
+ margin-top: 500px;
+ font-size: 60px;
+ background-color: black;
+ color: white;
+ border-radius: 20px;
+ } 
+ .flex-container #btnSalvar:hover {
+ //background-image: linear-gradient(to right, #000000, #0a1852);
+ }
+ 
+ .flex-container #btnSalvar:active {
+  background-image: linear-gradient(to right, #000000, #0a1852);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+ 
+ }
+
+ #semana, #status {
+   font-size: 50px;
+   color: #fff;
+   text-align: center;
+   background-color: #1C1C1C;
+   border-radius: 10px 10px 0px 0px;
+ }
+ 
+ #tear {
+   font-size: 50px;
+   color: white;
+   text-align: center;
+   background-color: #1C1C1C;
+   border-radius: 0px 0px 10px 10px;
+ }
+ 
+ #semanaCard {
+ background-color: #808080;
+ color: #000;
+ border: 2px solid #808080;
+ border-radius: 10px;
+ }
+ 
+   #status {
+   font-size: 30px;
+   color: #fff;
+   border: 2px solid #fff;
+   text-align: center;
+   border-radius: 10px;
+   width: 280px;
+   height: 50px;
+   
+ }
+
+/*--talela=============-->*/
+#tabela {
+ display: none;
+
+}
+   table
+        {
+            width: 300px;
+            font: 17px Calibri;
+			background-color: #fff;
+        }
+        table, th, td
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+		.remover-borda {
+		border: none;
+		border-bottom: none;
+		}
+		
+		#btns {
+		display: flex;
+		
+		}
+		
+		#btnHome {
+		    display: flex;
+			justify-content: center;
+			text-align: center;
+            border: 1px solid gray;
+			width: 75px;
+			height: 20px;
+			text-decoration: none;
+			border-radius: 5px;
+			background-color: white;
+			margin-left: 10px;
+			padding: 5px;
+		}
+
+
+</style>
+</head>
+<body id="main">
+<div id="content" style="display: none">
+<h1 id="titulo" >INPUT RPM</h1>
+
+<div id="semanaCard">
+	<div id="semana"><label>SEMANA </label></div>
+	<div id="tear"><label>TEAR 1</label></div>
+</div>
+
+ <div class="flex-container">
+      <div>
+	   <h1>RPM</h1>
+	   <input id="iRpm" inputmode="numeric" placeholder="INSERIR"></input>
+	  </div>
+	
+	  <div>
+	   <h1>ARTIGO</h1>
+	   <input id="iArt" inputmode="numeric" placeholder="INSERIR"></input>
+	  </div>
+ </div>
+ 
+ <div class="flex-container">
+  <input type="button" id="btnSalvar" value="SALVAR" onclick="save()"/>
+  
+  <input type="button" id="btnSalvar" value="ALTERAR" onclick="update()"/>
+   
+   <input type="button" id="btnSalvar" value="CLEAR" onclick="ClearStorage()"/>
+  
+
+ </div>
+
+<div class="flex-container">
+ <div id="status"><label>status...</label></div>
+</div>
+<!-- <div id="btnExport"> -->
+
+
+ <!-- <a id="Export" href="file:///storage/emulated/0/Download/rpm - tablet/gerarPDF.html">PDF</a> -->
+
+<!-- </div> -->
+<div id="titulo2">
+<!-- <img src="" width=60 height=40> -->
+<h1>BAE SOLUTIONS</h1>
+
+</div>
+   <!--  <p>
+        <input type="button" value="Criar PDF" id="btnImprimir" onclick="semanaAtual()" />
+		
+		<input type="button" value="clear" id="btnImprimir" onclick="ClearStorage()" />
+		
+    </p> -->
+
+</div>
+
+<!--corpo da tabela-->
+  <div id="tabela">
+        <table>
+
+<!-- file:///storage/emulated/0/Download/rpm - tablet/cabeçalho-fm-52.png -->
+		   <tr>
+		     <th colspan="9"><img src="https://shinagame-41aef.web.app/img/cabe%C3%A7alho-fm-52.PNG" width="100%"/></th>
+		   </tr>
+
+<tr height="50px"><td>DATA: </td></tr>
+
+
+		<tr>
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+		</tr>
+
+<tr>
+<td id="test">1</td>
+<td></td>
+<td></td>
+
+<td>25</td>
+<td></td>
+<td></td>
+
+<td>49</td>
+<td></td>
+<td></td>
+</tr>
+
+			<tr>
+			<td>2</td>
+			<td></td>
+			<td></td>
+
+			<td>26</td>
+			<td></td>
+			<td></td>
+
+			<td>50</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+<tr>
+<td>3</td>
+<td></td>
+<td></td>
+
+<td>27</td>
+<td></td>
+<td></td>
+
+<td>51</td>
+<td></td>
+<td></td>
+</tr>
+
+			<tr>
+			<td>4</td>
+			<td></td>
+			<td></td>
+
+			<td>28</td>
+			<td></td>
+			<td></td>
+
+			<td>52</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+<tr>
+<td>5</td>
+<td></td>
+<td></td>
+
+<td>29</td>
+<td></td>
+<td></td>
+
+<td>53</td>
+<td></td>
+<td></td>
+</tr>
+
+			<tr>
+			<td>6</td>
+			<td></td>
+			<td></td>
+
+			<td>30</td>
+			<td></td>
+			<td></td>
+
+			<td>54</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+<tr>
+<td>7</td>
+<td></td>
+<td></td>
+
+<td>31</td>
+<td></td>
+<td></td>
+
+<td>55</td>
+<td></td>
+<td></td>
+</tr>
+
+				<tr>
+				<td>8</td>
+				<td></td>
+				<td></td>
+
+				<td>32</td>
+				<td></td>
+				<td></td>
+
+				<td>56</td>
+				<td></td>
+				<td></td>
+				</tr>
+
+<tr>
+<td>9</td>
+<td></td>
+<td></td>
+
+<td>33</td>
+<td></td>
+<td></td>
+
+<td>57</td>
+<td></td>
+<td></td>
+</tr>
+
+				<tr>
+				<td>10</td>
+				<td></td>
+				<td></td>
+
+				<td>34</td>
+				<td></td>
+				<td></td>
+
+				<td>58</td>
+				<td></td>
+				<td></td>
+				</tr>
+
+	<tr>
+	<td>11</td>
+	<td></td>
+	<td></td>
+
+	<td>35</td>
+	<td></td>
+	<td></td>
+
+	<td>59</td>
+	<td></td>
+	<td></td>
+	</tr>
+
+					<tr>
+					<td>12</td>
+					<td></td>
+					<td></td>
+
+					<td>36</td>
+					<td></td>
+					<td></td>
+
+					<td>60</td>
+					<td></td>
+					<td></td>
+					</tr>
+
+					<tr>
+						<td>
+						&nbsp;
+						</td>
+							  <td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+
+
+					</tr>
+
+<tr>
+<td>MEDIA ➪️</td>
+<td id="totalRpm1"></td>
+<td id="totalArt"></td>
+
+<td>MEDIA ➪</td>
+<td id="totalRpm3"></td>
+<td></td>
+
+<td>MEDIA ➪</td>
+<td id="totalRpm5"></td>
+<td></td>
+</tr>
+                    <tr><td>&nbsp;</td></tr>
+					
+			
+		<tr>
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+		</tr>
+
+
+
+<tr>
+<td>13</td>
+<td></td>
+<td></td>
+
+<td>37</td>
+<td></td>
+<td></td>
+
+<td>61</td>
+<td></td>
+<td></td>
+</tr>
+
+				<tr>
+				<td>14</td>
+				<td></td>
+				<td></td>
+
+				<td>38</td>
+				<td></td>
+				<td></td>
+
+				<td>62</td>
+				<td></td>
+				<td></td>
+				</tr>
+
+<tr>
+<td>15</td>
+<td></td>
+<td></td>
+
+<td>39</td>
+<td></td>
+<td></td>
+
+<td>63</td>
+<td></td>
+<td></td>
+</tr>
+
+				<tr>
+				<td>16</td>
+				<td></td>
+				<td></td>
+
+				<td>40</td>
+				<td></td>
+				<td></td>
+
+				<td>64</td>
+				<td></td>
+				<td></td>
+				</tr>
+
+<tr>
+<td>17</td>
+<td></td>
+<td></td>
+
+<td>41</td>
+<td></td>
+<td></td>
+
+<td>65</td>
+<td></td>
+<td></td>
+</tr>
+
+			<tr>
+			<td>18</td>
+			<td></td>
+			<td></td>
+
+			<td>42</td>
+			<td></td>
+			<td></td>
+
+			<td>66</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+			<tr>
+			<td>19</td>
+			<td></td>
+			<td></td>
+
+			<td>43</td>
+			<td></td>
+			<td></td>
+
+			<td>67</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+	<tr>
+	<td>20</td>
+	<td></td>
+	<td></td>
+
+	<td>44</td>
+	<td></td>
+	<td></td>
+
+	<td>68</td>
+	<td></td>
+	<td></td>
+	</tr>
+
+			<tr>
+			<td>21</td>
+			<td></td>
+			<td></td>
+
+			<td>45</td>
+			<td></td>
+			<td></td>
+
+			<td>69</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+					<tr>
+					<td>22</td>
+					<td></td>
+					<td></td>
+
+					<td>46</td>
+					<td></td>
+					<td></td>
+
+					<td>70</td>
+					<td></td>
+					<td></td>
+					</tr>
+
+			<tr>
+			<td>23</td>
+			<td></td>
+			<td></td>
+
+			<td>47</td>
+			<td></td>
+			<td></td>
+
+			<td>71</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+					<tr>
+					<td>24</td>
+					<td></td>
+					<td></td>
+
+					<td>48</td>
+					<td></td>
+					<td></td>
+
+					<td>72</td>
+					<td></td>
+					<td></td>
+					</tr>
+
+					<!-- <tr> -->
+					<!-- <td>12</td> -->
+					<!-- <td></td> -->
+					<!-- <td></td> -->
+
+					<!-- <td>36</td> -->
+					<!-- <td></td> -->
+					<!-- <td></td> -->
+
+					<!-- <td>60</td> -->
+					<!-- <td></td> -->
+					<!-- <td></td> -->
+					<!-- </tr> -->
+
+					<tr>
+						<td>
+						&nbsp;
+						</td>
+							  <td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+
+
+					</tr>
+					
+					
+
+<tr> 
+<td>MEDIA ➪</td>
+<td id="totalRpm2"></td>
+<td></td>
+
+<td>MEDIA ➪</td>
+<td id="totalRpm4"></td>
+<td></td>
+
+<td>MEDIA ➪</td>
+<td id="totalRpm6"></td>
+<td></td>
+</tr>
+                    <tr><td>&nbsp;</td></tr>
+					
+		<tr>
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+
+		<th>TEAR</th>
+		<th>RPM</th>
+		<th>ARTIGO</th>
+		</tr>
+
+			<tr>
+			<td>73</td>
+			<td></td>
+			<td></td>
+
+			<td>79</td>
+			<td></td>
+			<td></td>
+
+			<td>85</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+					<tr>
+					<td>74</td>
+					<td></td>
+					<td></td>
+
+					<td>80</td>
+					<td></td>
+					<td></td>
+
+					<td>86</td>
+					<td></td>
+					<td></td>
+					</tr>
+
+			<tr>
+			<td>75</td>
+			<td></td>
+			<td></td>
+
+			<td>81</td>
+			<td></td>
+			<td></td>
+
+			<td>87</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+					<tr>
+					<td>76</td>
+					<td></td>
+					<td></td>
+
+					<td>82</td>
+					<td></td>
+					<td></td>
+
+					<td>88</td>
+					<td></td>
+					<td></td>
+					</tr>
+
+			<tr>
+			<td>77</td>
+			<td></td>
+			<td></td>
+
+			<td>83</td>
+			<td></td>
+			<td></td>
+
+			<td>89</td>
+			<td></td>
+			<td></td>
+			</tr>
+
+					<tr>
+					<td>78</td>
+					<td></td>
+					<td></td>
+
+					<td>84</td>
+					<td></td>
+					<td></td>
+
+					<td>&nbsp;</td>
+					<td></td>
+					<td></td>
+
+					<tr>
+						<td>
+						&nbsp;
+						</td>
+							  <td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+								<td>
+								&nbsp;
+								</td>
+
+
+					</tr>
+
+<tr>
+<td>MEDIA ➪</td>
+<td id="totalRpm7.1"></td>
+<td></td>
+
+<td>MEDIA ➪</td>
+<td id="totalRpm7.2"></td>
+<td></td>
+
+<td>MEDIA ➪</td>
+<td id="totalRpm8"></td>
+<td></td>
+</tr>
+
+ <tr><td>&nbsp;</td></tr>
+
+			<tr class="remover-borda">
+				<td colspan="9"><img src="https://shinagame-41aef.web.app/img/rodape.PNG"/></td>
+			</tr>
+                                           <!-- file:///storage/emulated/0/Download/rpm - tablet/rodape.png -->
+
+
+        </table>
+    </div>
+    <p id="btns">
+        <input type="button" value="Criar PDF" id="btnImprimir" onclick="mostrarTable()" />
+		<!-- <a href="./RPM.html" id="btnHome">HOME</a> -->
+    </p>
+<!--Fim do corpo da tablea-->
+
+<div id="loading">
+Carregando Conteúdo!
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script>
+
+var i = setInterval(function() {
+ clearInterval(i);
+ 
+ document.getElementById('loading').style.display = "none";
+ document.getElementById('content').style.display = "block";
+}, 3000);
+
+ const log = console.log;   
+ 
+function anterior() { 
+ 
+const arr = [
+localStorage.getItem('tear1'), localStorage.getItem('tear2'),
+localStorage.getItem('tear3'), localStorage.getItem('tear4'),
+localStorage.getItem('tear5'), localStorage.getItem('tear6'),
+localStorage.getItem('tear7'), localStorage.getItem('tear8'),
+localStorage.getItem('tear9'), localStorage.getItem('tear10'),
+localStorage.getItem('tear11'), localStorage.getItem('tear12'),
+localStorage.getItem('tear13'), localStorage.getItem('tear14'),
+localStorage.getItem('tear15'), localStorage.getItem('tear16'),
+localStorage.getItem('tear17'), localStorage.getItem('tear18'),
+localStorage.getItem('tear19'), localStorage.getItem('tear20'),
+localStorage.getItem('tear21'), localStorage.getItem('tear22'),
+localStorage.getItem('tear23'), localStorage.getItem('tear24'),
+localStorage.getItem('tear25'), localStorage.getItem('tear26'),
+localStorage.getItem('tear27'), localStorage.getItem('tear28'),
+localStorage.getItem('tear29'), localStorage.getItem('tear30'),
+localStorage.getItem('tear31'), localStorage.getItem('tear32'),
+localStorage.getItem('tear33'), localStorage.getItem('tear34'),
+localStorage.getItem('tear35'), localStorage.getItem('tear36'),
+localStorage.getItem('tear37'), localStorage.getItem('tear38'),
+localStorage.getItem('tear39'), localStorage.getItem('tear40'),
+localStorage.getItem('tear41'), localStorage.getItem('tear42'),
+localStorage.getItem('tear43'), localStorage.getItem('tear44'),
+localStorage.getItem('tear45'), localStorage.getItem('tear46'),
+localStorage.getItem('tear47'), localStorage.getItem('tear48'),
+localStorage.getItem('tear49'), localStorage.getItem('tear50'),
+localStorage.getItem('tear51'), localStorage.getItem('tear52'),
+localStorage.getItem('tear53'), localStorage.getItem('tear54'),
+localStorage.getItem('tear55'), localStorage.getItem('tear56'),
+localStorage.getItem('tear57'), localStorage.getItem('tear58'),
+localStorage.getItem('tear59'), localStorage.getItem('tear60'),
+localStorage.getItem('tear61'), localStorage.getItem('tear62'),
+localStorage.getItem('tear63'), localStorage.getItem('tear64'),
+localStorage.getItem('tear65'), localStorage.getItem('tear66'),
+localStorage.getItem('tear67'), localStorage.getItem('tear68'),
+localStorage.getItem('tear69'), localStorage.getItem('tear70'),
+localStorage.getItem('tear71'), localStorage.getItem('tear72'),
+localStorage.getItem('tear73'), localStorage.getItem('tear74'),
+localStorage.getItem('tear75'), localStorage.getItem('tear76'),
+localStorage.getItem('tear77'), localStorage.getItem('tear78'),
+localStorage.getItem('tear79'), localStorage.getItem('tear80'),
+localStorage.getItem('tear81'), localStorage.getItem('tear82'),
+localStorage.getItem('tear83'), localStorage.getItem('tear84'),
+localStorage.getItem('tear85'), localStorage.getItem('tear86'),
+localStorage.getItem('tear87'), localStorage.getItem('tear88'),
+localStorage.getItem('tear89'),
+
+];
+log(arr)
+};
+
+anterior();
+
+const array = [];
+
+function save() {
+
+var tear = localStorage.length;
+
+if(tear <= 176) {
+
+ function chamar(value, key, artV, artK) {
+	  var a = document.querySelectorAll('input')[value].value;
+	   var b = document.querySelectorAll('input')[artV].value;
+        localStorage.setItem(key, a);   
+		 localStorage.setItem(artK, b); 
+ }
+ 
+ log(tear);
+ 
+      if(tear == 0) {	chamar(0, 'tear1', 1, 'artigo1') }
+ else if(tear == 2) {	chamar(0, 'tear2', 1, 'artigo2') }
+ else if(tear == 4) {	chamar(0, 'tear3', 1, 'artigo3') }
+ else if(tear == 6) {	chamar(0, 'tear4', 1, 'artigo4') }
+ else if(tear == 8) {	chamar(0, 'tear5', 1, 'artigo5') }
+ else if(tear == 10) {	chamar(0, 'tear6', 1, 'artigo6') }
+ else if(tear == 12) {	chamar(0, 'tear7', 1, 'artigo7') }
+ else if(tear == 14) {	chamar(0, 'tear8', 1, 'artigo8') }
+ else if(tear == 16) {	chamar(0, 'tear9', 1, 'artigo9') }
+ else if(tear == 18) {	chamar(0, 'tear10', 1, 'artigo10') }
+ else if(tear == 20) {	chamar(0, 'tear11', 1, 'artigo11') }
+ else if(tear == 22) {	chamar(0, 'tear12', 1, 'artigo12') }
+ else if(tear == 24) {	chamar(0, 'tear13', 1, 'artigo13') }
+ else if(tear == 26) {	chamar(0, 'tear14', 1, 'artigo14') }
+ else if(tear == 28) {	chamar(0, 'tear15', 1, 'artigo15') }
+ else if(tear == 30) {	chamar(0, 'tear16', 1, 'artigo16') }
+ else if(tear == 32) {	chamar(0, 'tear17', 1, 'artigo17') }
+ else if(tear == 34) {	chamar(0, 'tear18', 1, 'artigo18') }
+ else if(tear == 36) {	chamar(0, 'tear19', 1, 'artigo19') }
+ else if(tear == 38) {	chamar(0, 'tear20', 1, 'artigo20') }
+ else if(tear == 40) {	chamar(0, 'tear21', 1, 'artigo21') }
+ else if(tear == 42) {	chamar(0, 'tear22', 1, 'artigo22') }
+ else if(tear == 44) {	chamar(0, 'tear23', 1, 'artigo23') }
+ else if(tear == 46) {	chamar(0, 'tear24', 1, 'artigo24') }
+ else if(tear == 48) {	chamar(0, 'tear25', 1, 'artigo25') }
+ else if(tear == 50) {	chamar(0, 'tear26', 1, 'artigo26') }
+ else if(tear == 52) {	chamar(0, 'tear27', 1, 'artigo27') }
+ else if(tear == 54) {	chamar(0, 'tear28', 1, 'artigo28') }
+ else if(tear == 56) {	chamar(0, 'tear29', 1, 'artigo29') }
+ else if(tear == 58) {	chamar(0, 'tear30', 1, 'artigo30') }
+ else if(tear == 60) {	chamar(0, 'tear31', 1, 'artigo31') }
+ else if(tear == 62) {	chamar(0, 'tear32', 1, 'artigo32') }
+ else if(tear == 64) {	chamar(0, 'tear33', 1, 'artigo33') }
+ else if(tear == 66) {	chamar(0, 'tear34', 1, 'artigo34') }
+ else if(tear == 68) {	chamar(0, 'tear35', 1, 'artigo35') }
+ else if(tear == 70) {	chamar(0, 'tear36', 1, 'artigo36') }
+ else if(tear == 72) {	chamar(0, 'tear37', 1, 'artigo37') }
+ else if(tear == 74) {	chamar(0, 'tear38', 1, 'artigo38') }
+ else if(tear == 76) {	chamar(0, 'tear39', 1, 'artigo39') }
+ else if(tear == 78) {	chamar(0, 'tear40', 1, 'artigo40') }
+ else if(tear == 80) {	chamar(0, 'tear41', 1, 'artigo41') }
+ else if(tear == 82) {	chamar(0, 'tear42', 1, 'artigo42') }
+ else if(tear == 84) {	chamar(0, 'tear43', 1, 'artigo43') }
+ else if(tear == 86) {	chamar(0, 'tear44', 1, 'artigo44') }
+ else if(tear == 88) {	chamar(0, 'tear45', 1, 'artigo45') }
+ else if(tear == 90) {	chamar(0, 'tear46', 1, 'artigo46') }
+ else if(tear == 92) {	chamar(0, 'tear47', 1, 'artigo47') }
+ else if(tear == 94) {	chamar(0, 'tear48', 1, 'artigo48') }
+ else if(tear == 96) {	chamar(0, 'tear49', 1, 'artigo49') }
+ else if(tear == 98) {	chamar(0, 'tear50', 1, 'artigo50') }
+ else if(tear == 100) {	chamar(0, 'tear51', 1, 'artigo51') }
+ else if(tear == 102) {	chamar(0, 'tear52', 1, 'artigo52') }
+ else if(tear == 104) {	chamar(0, 'tear53', 1, 'artigo53') }
+ else if(tear == 106) {	chamar(0, 'tear54', 1, 'artigo54') }
+ else if(tear == 108) {	chamar(0, 'tear55', 1, 'artigo55') }
+ else if(tear == 110) {	chamar(0, 'tear56', 1, 'artigo56') }
+ else if(tear == 112) {	chamar(0, 'tear57', 1, 'artigo57') }
+ else if(tear == 114) {	chamar(0, 'tear58', 1, 'artigo58') }
+ else if(tear == 116) {	chamar(0, 'tear59', 1, 'artigo59') }
+ else if(tear == 118) {	chamar(0, 'tear60', 1, 'artigo60') }
+ else if(tear == 120) {	chamar(0, 'tear61', 1, 'artigo61') }
+ else if(tear == 122) {	chamar(0, 'tear62', 1, 'artigo62') }
+ else if(tear == 124) {	chamar(0, 'tear63', 1, 'artigo63') }
+ else if(tear == 126) {	chamar(0, 'tear64', 1, 'artigo64') }
+ else if(tear == 128) {	chamar(0, 'tear65', 1, 'artigo65') }
+ else if(tear == 130) {	chamar(0, 'tear66', 1, 'artigo66') }
+ else if(tear == 132) {	chamar(0, 'tear67', 1, 'artigo67') }
+ else if(tear == 134) {	chamar(0, 'tear68', 1, 'artigo68') }
+ else if(tear == 136) {	chamar(0, 'tear69', 1, 'artigo69') }
+ else if(tear == 138) {	chamar(0, 'tear70', 1, 'artigo70') }
+ else if(tear == 140) {	chamar(0, 'tear71', 1, 'artigo71') }
+ else if(tear == 142) {	chamar(0, 'tear72', 1, 'artigo72') }
+ else if(tear == 144) {	chamar(0, 'tear73', 1, 'artigo73') }
+ else if(tear == 146) {	chamar(0, 'tear74', 1, 'artigo74') }
+ else if(tear == 148) {	chamar(0, 'tear75', 1, 'artigo75') }
+ else if(tear == 150) {	chamar(0, 'tear76', 1, 'artigo76') }
+ else if(tear == 152) {	chamar(0, 'tear77', 1, 'artigo77') }
+ else if(tear == 154) {	chamar(0, 'tear78', 1, 'artigo78') }
+ else if(tear == 156) {	chamar(0, 'tear79', 1, 'artigo79') }
+ else if(tear == 158) {	chamar(0, 'tear80', 1, 'artigo80') }
+ else if(tear == 160) {	chamar(0, 'tear81', 1, 'artigo81') }
+ else if(tear == 162) {	chamar(0, 'tear82', 1, 'artigo82') }
+ else if(tear == 164) {	chamar(0, 'tear83', 1, 'artigo83') }
+ else if(tear == 166) {	chamar(0, 'tear84', 1, 'artigo84') }
+ else if(tear == 168) {	chamar(0, 'tear85', 1, 'artigo85') }
+ else if(tear == 170) {	chamar(0, 'tear86', 1, 'artigo86') }
+ else if(tear == 172) {	chamar(0, 'tear87', 1, 'artigo87') }
+ else if(tear == 174) {	chamar(0, 'tear88', 1, 'artigo88') }
+ else if(tear == 176) {	chamar(0, 'tear89', 1, 'artigo89') }
+ 
+
+  contar();
+
+} 
+
+limparForm();
+
+}
+ 
+
+function contar() {
+  var hk = Math.random();
+  array.push(hk);
+ var i;
+  for(i=0;i<array.length;i++){
+  
+  }
+  log(i);
+
+  var tear = localStorage.length + 01;
+   var flag = i + 1;
+
+  if(flag <= 89) {
+	 document.getElementById('tear').innerHTML = "TEAR " + flag;
+  document.getElementById('status').innerHTML = "TEAR " + i + " SALVO 🟢";
+  }
+  
+} 
+
+function ClearStorage(){
+localStorage.clear();
+ location.reload();
+  alert("No of items in local storage is " + localStorage.length);
+  limparForm();
+};
+
+function limparForm() {
+  var a = document.getElementById('iRpm').value; 
+   var b = document.getElementById('iArt').value;
+  
+     if(a > 0 && b > 0) {
+	     document.getElementById('iRpm').value = ''; 
+         document.getElementById('iArt').value = '';
+	 }
+}
+
+document.getElementById('tabela').style.display = 'none';
+
+function mostrarTable() {
+  var table = document.getElementById('tabela').style.display;
+  var content = document.getElementById('content').style.display;
+  
+  if(table == 'none'){
+     document.getElementById('tabela').style.display = 'block';
+	  document.getElementById('content').style.display = 'none';
+	  	buscarResultados();
+    }else{
+		 document.getElementById('tabela').style.display = 'none';
+	  document.getElementById('content').style.display = 'block';
+	}
+ 
+}
+
+
+function update() {
+	var numeroDoTear = prompt("Qual o numero do tear?")
+	log(numeroDoTear);
+}
+
+function mediaUm(t) {
+			var i = 0, summ = 0, ArrayLen = t.length;
+			while (i < ArrayLen) {
+			summ = parseInt(summ + t[i++]);
+			}
+			
+				var qtd = 0;
+				for (var i = 0; i < t.length; i++) {
+				if (t[i] > 0) {qtd++};
+
+				}
+				console.log(qtd);
+				//log(t.length)
+			
+			log(qtd, summ, ArrayLen)
+			
+			console.log(summ);
+				return summ/(qtd);
+			}
+
+function buscarResultados() {
+// <!-- ===== 1º grupo ============================================== -->
+
+var arr1 = [
+document.querySelectorAll("td")[2].innerHTML  = localStorage.getItem('tear1'),
+document.querySelectorAll("td")[3].innerHTML  = localStorage.getItem('artigo1'), 
+document.querySelectorAll("td")[11].innerHTML = localStorage.getItem('tear2'),
+document.querySelectorAll("td")[12].innerHTML = localStorage.getItem('artigo2'), 
+document.querySelectorAll("td")[20].innerHTML = localStorage.getItem('tear3'),
+document.querySelectorAll("td")[21].innerHTML = localStorage.getItem('artigo3'), 
+document.querySelectorAll("td")[29].innerHTML = localStorage.getItem('tear4'),
+document.querySelectorAll("td")[30].innerHTML = localStorage.getItem('artigo4'), 
+document.querySelectorAll("td")[38].innerHTML = localStorage.getItem('tear5'),
+document.querySelectorAll("td")[39].innerHTML = localStorage.getItem('artigo5'), 
+document.querySelectorAll("td")[47].innerHTML = localStorage.getItem('tear6'),
+document.querySelectorAll("td")[48].innerHTML = localStorage.getItem('artigo6'), 
+document.querySelectorAll("td")[56].innerHTML = localStorage.getItem('tear7'),
+document.querySelectorAll("td")[57].innerHTML = localStorage.getItem('artigo7'), 
+document.querySelectorAll("td")[65].innerHTML = localStorage.getItem('tear8'),
+document.querySelectorAll("td")[66].innerHTML = localStorage.getItem('artigo8'), 
+document.querySelectorAll("td")[74].innerHTML = localStorage.getItem('tear9'),
+document.querySelectorAll("td")[75].innerHTML = localStorage.getItem('artigo9'), 
+document.querySelectorAll("td")[83].innerHTML = localStorage.getItem('tear10'),
+document.querySelectorAll("td")[84].innerHTML = localStorage.getItem('artigo10'), 
+document.querySelectorAll("td")[92].innerHTML = localStorage.getItem('tear11'),
+document.querySelectorAll("td")[93].innerHTML = localStorage.getItem('artigo11'), 
+document.querySelectorAll("td")[101].innerHTML= localStorage.getItem('tear12'),
+document.querySelectorAll("td")[102].innerHTML= localStorage.getItem('artigo12'), 
+];
+ arr1;
+
+ var myArray = [];
+
+if (arr1[0] > 0) {myArray.push(parseInt(arr1[0]))}
+if (arr1[2] > 0) {myArray.push(parseInt(arr1[2]))}
+if (arr1[4] > 0) {myArray.push(parseInt(arr1[4]))}
+if (arr1[6] > 0) {myArray.push(parseInt(arr1[6]))}
+if (arr1[8] > 0) {myArray.push(parseInt(arr1[8]))}
+if (arr1[10] > 0) {myArray.push(parseInt(arr1[10]))}
+if (arr1[12] > 0) {myArray.push(parseInt(arr1[12]))}
+if (arr1[14] > 0) {myArray.push(parseInt(arr1[14]))}
+if (arr1[16] > 0) {myArray.push(parseInt(arr1[16]))}
+if (arr1[18] > 0) {myArray.push(parseInt(arr1[18]))}
+if (arr1[20] > 0) {myArray.push(parseInt(arr1[20]))}
+if (arr1[22] > 0) {myArray.push(parseInt(arr1[22]))}
+
+
+ document.getElementById('totalRpm1').innerHTML = mediaUm(myArray).toFixed(0);
+// <!-- ===== 1º grupo ============================================== -->
+
+// <!-- ===== 2º grupo ============================================== -->
+
+var arr2 = [
+document.querySelectorAll("td")[129].innerHTML = localStorage.getItem('tear13'),
+document.querySelectorAll("td")[130].innerHTML = localStorage.getItem('artigo13'),
+document.querySelectorAll("td")[138].innerHTML = localStorage.getItem('tear14'),
+document.querySelectorAll("td")[139].innerHTML = localStorage.getItem('artigo14'),
+document.querySelectorAll("td")[147].innerHTML = localStorage.getItem('tear15'),
+document.querySelectorAll("td")[148].innerHTML = localStorage.getItem('artigo15'), 
+document.querySelectorAll("td")[156].innerHTML = localStorage.getItem('tear16'),
+document.querySelectorAll("td")[157].innerHTML = localStorage.getItem('artigo16'), 
+document.querySelectorAll("td")[165].innerHTML = localStorage.getItem('tear17'),
+document.querySelectorAll("td")[166].innerHTML = localStorage.getItem('artigo17'), 
+document.querySelectorAll("td")[174].innerHTML = localStorage.getItem('tear18'),
+document.querySelectorAll("td")[175].innerHTML = localStorage.getItem('artigo18'), 
+document.querySelectorAll("td")[183].innerHTML = localStorage.getItem('tear19'),
+document.querySelectorAll("td")[184].innerHTML = localStorage.getItem('artigo19'), 
+document.querySelectorAll("td")[192].innerHTML = localStorage.getItem('tear20'),
+document.querySelectorAll("td")[193].innerHTML = localStorage.getItem('artigo20'), 
+document.querySelectorAll("td")[201].innerHTML = localStorage.getItem('tear21'),
+document.querySelectorAll("td")[202].innerHTML = localStorage.getItem('artigo21'), 
+document.querySelectorAll("td")[210].innerHTML = localStorage.getItem('tear22'),
+document.querySelectorAll("td")[211].innerHTML = localStorage.getItem('artigo22'), 
+document.querySelectorAll("td")[219].innerHTML = localStorage.getItem('tear23'),
+document.querySelectorAll("td")[220].innerHTML = localStorage.getItem('artigo23'), 
+document.querySelectorAll("td")[228].innerHTML = localStorage.getItem('tear24'),
+document.querySelectorAll("td")[229].innerHTML = localStorage.getItem('artigo24'), 
+];
+arr2;
+
+var myArray2 = [];
+
+if (arr2[12] > 0) {myArray2.push(parseInt(arr1[12]))}
+if (arr2[13] > 0) {myArray2.push(parseInt(arr1[13]))}
+if (arr2[14] > 0) {myArray2.push(parseInt(arr1[14]))}
+if (arr2[15] > 0) {myArray2.push(parseInt(arr1[15]))}
+if (arr2[16] > 0) {myArray2.push(parseInt(arr1[16]))}
+if (arr2[17] > 0) {myArray2.push(parseInt(arr1[17]))}
+if (arr2[18] > 0) {myArray2.push(parseInt(arr1[18]))}
+if (arr2[19] > 0) {myArray2.push(parseInt(arr1[19]))}
+if (arr2[20] > 0) {myArray2.push(parseInt(arr1[20]))}
+if (arr2[21] > 0) {myArray2.push(parseInt(arr1[21]))}
+if (arr2[22] > 0) {myArray2.push(parseInt(arr1[22]))}
+if (arr2[23] > 0) {myArray2.push(parseInt(arr1[23]))}
+
+
+ document.getElementById('totalRpm2').innerHTML = mediaUm(myArray2).toFixed(0);
+
+// <!-- <!--===== 2º grupo ==============================================-->
+
+// <!-- ===== 3º grupo ============================================== -->
+
+var arr3 = [
+document.querySelectorAll("td")[5].innerHTML = localStorage.getItem('tear25'),
+document.querySelectorAll("td")[6].innerHTML = localStorage.getItem('artigo25'),  
+document.querySelectorAll("td")[14].innerHTML = localStorage.getItem('tear26'), 
+document.querySelectorAll("td")[15].innerHTML = localStorage.getItem('artigo26'), 
+document.querySelectorAll("td")[23].innerHTML = localStorage.getItem('tear27'),   
+document.querySelectorAll("td")[24].innerHTML = localStorage.getItem('artigo27'), 
+document.querySelectorAll("td")[32].innerHTML = localStorage.getItem('tear28'),  
+document.querySelectorAll("td")[33].innerHTML = localStorage.getItem('artigo28'), 
+document.querySelectorAll("td")[41].innerHTML = localStorage.getItem('tear29'),  
+document.querySelectorAll("td")[42].innerHTML = localStorage.getItem('artigo29'), 
+document.querySelectorAll("td")[50].innerHTML = localStorage.getItem('tear30'),   
+document.querySelectorAll("td")[51].innerHTML = localStorage.getItem('artigo30'), 
+document.querySelectorAll("td")[59].innerHTML = localStorage.getItem('tear31'),  
+document.querySelectorAll("td")[60].innerHTML = localStorage.getItem('artigo31'), 
+document.querySelectorAll("td")[68].innerHTML = localStorage.getItem('tear32'),  
+document.querySelectorAll("td")[69].innerHTML = localStorage.getItem('artigo32'), 
+document.querySelectorAll("td")[77].innerHTML = localStorage.getItem('tear33'),  
+document.querySelectorAll("td")[78].innerHTML = localStorage.getItem('artigo33'), 
+document.querySelectorAll("td")[86].innerHTML = localStorage.getItem('tear34'),  
+document.querySelectorAll("td")[87].innerHTML = localStorage.getItem('artigo34'), 
+document.querySelectorAll("td")[95].innerHTML = localStorage.getItem('tear35'),  
+document.querySelectorAll("td")[96].innerHTML = localStorage.getItem('artigo35'), 
+document.querySelectorAll("td")[104].innerHTML = localStorage.getItem('tear36'),   
+document.querySelectorAll("td")[105].innerHTML = localStorage.getItem('artigo36'), 
+];
+arr3;
+
+var myArray3 = [];
+
+if (arr3[24] > 0) {myArray3.push(parseInt(arr3[24]))}
+if (arr3[25] > 0) {myArray3.push(parseInt(arr3[25]))}
+if (arr3[26] > 0) {myArray3.push(parseInt(arr3[26]))}
+if (arr3[27] > 0) {myArray3.push(parseInt(arr3[27]))}
+if (arr3[28] > 0) {myArray3.push(parseInt(arr3[28]))}
+if (arr3[29] > 0) {myArray3.push(parseInt(arr3[29]))}
+if (arr3[30] > 0) {myArray3.push(parseInt(arr3[30]))}
+if (arr3[31] > 0) {myArray3.push(parseInt(arr3[31]))}
+if (arr3[32] > 0) {myArray3.push(parseInt(arr3[32]))}
+if (arr3[33] > 0) {myArray3.push(parseInt(arr3[33]))}
+if (arr3[34] > 0) {myArray3.push(parseInt(arr3[34]))}
+if (arr3[35] > 0) {myArray3.push(parseInt(arr3[35]))}
+
+
+ document.getElementById('totalRpm3').innerHTML = mediaUm(myArray3).toFixed(0);
+// <!-- ===== 3º grupo ============================================== -->
+ 
+// <!-- ===== 4º grupo ============================================== -->
+
+var arr4 = [
+document.querySelectorAll("td")[132].innerHTML = localStorage.getItem('tear37'),      
+document.querySelectorAll("td")[133].innerHTML = localStorage.getItem('artigo37'),
+document.querySelectorAll("td")[141].innerHTML = localStorage.getItem('tear38'),        
+document.querySelectorAll("td")[142].innerHTML = localStorage.getItem('artigo38'),
+document.querySelectorAll("td")[150].innerHTML = localStorage.getItem('tear39'),        
+document.querySelectorAll("td")[151].innerHTML = localStorage.getItem('artigo39'),
+document.querySelectorAll("td")[159].innerHTML = localStorage.getItem('tear40'),        
+document.querySelectorAll("td")[160].innerHTML = localStorage.getItem('artigo40'),
+document.querySelectorAll("td")[168].innerHTML = localStorage.getItem('tear41'),        
+document.querySelectorAll("td")[169].innerHTML = localStorage.getItem('artigo41'),
+document.querySelectorAll("td")[177].innerHTML = localStorage.getItem('tear42'),        
+document.querySelectorAll("td")[178].innerHTML = localStorage.getItem('artigo42'),
+document.querySelectorAll("td")[186].innerHTML = localStorage.getItem('tear43'),        
+document.querySelectorAll("td")[187].innerHTML = localStorage.getItem('artigo43'),
+document.querySelectorAll("td")[195].innerHTML = localStorage.getItem('tear44'),        
+document.querySelectorAll("td")[196].innerHTML = localStorage.getItem('artigo44'),
+document.querySelectorAll("td")[204].innerHTML = localStorage.getItem('tear45'),       
+document.querySelectorAll("td")[205].innerHTML = localStorage.getItem('artigo45'),
+document.querySelectorAll("td")[213].innerHTML = localStorage.getItem('tear46'),        
+document.querySelectorAll("td")[214].innerHTML = localStorage.getItem('artigo46'),
+document.querySelectorAll("td")[222].innerHTML = localStorage.getItem('tear47'),        
+document.querySelectorAll("td")[223].innerHTML = localStorage.getItem('artigo47'),
+document.querySelectorAll("td")[231].innerHTML = localStorage.getItem('tear48'),      
+document.querySelectorAll("td")[232].innerHTML = localStorage.getItem('artigo48'),
+];
+arr4;
+var myArray4 = [];
+
+if (arr4[24] > 0) {myArray4.push(parseInt(arr4[24]))}
+if (arr4[25] > 0) {myArray4.push(parseInt(arr4[25]))}
+if (arr4[26] > 0) {myArray4.push(parseInt(arr4[26]))}
+if (arr4[27] > 0) {myArray4.push(parseInt(arr4[27]))}
+if (arr4[28] > 0) {myArray4.push(parseInt(arr4[28]))}
+if (arr4[29] > 0) {myArray4.push(parseInt(arr4[29]))}
+if (arr4[30] > 0) {myArray4.push(parseInt(arr4[30]))}
+if (arr4[31] > 0) {myArray4.push(parseInt(arr4[31]))}
+if (arr4[32] > 0) {myArray4.push(parseInt(arr4[32]))}
+if (arr4[33] > 0) {myArray4.push(parseInt(arr4[33]))}
+if (arr4[34] > 0) {myArray4.push(parseInt(arr4[34]))}
+if (arr4[35] > 0) {myArray4.push(parseInt(arr4[35]))}
+
+
+ document.getElementById('totalRpm4').innerHTML = mediaUm(myArray4).toFixed(0);
+// <!-- <!--===== 4º grupo ==============================================-->	 -->
+
+// <!-- ===== 5º grupo ============================================== -->
+var arr5 = [
+document.querySelectorAll("td")[8].innerHTML  = localStorage.getItem('tear49'),  
+document.querySelectorAll("td")[9].innerHTML  = localStorage.getItem('artigo49'),
+document.querySelectorAll("td")[17].innerHTML = localStorage.getItem('tear50'),   
+document.querySelectorAll("td")[18].innerHTML = localStorage.getItem('artigo50'),
+document.querySelectorAll("td")[26].innerHTML = localStorage.getItem('tear51'),    
+document.querySelectorAll("td")[27].innerHTML = localStorage.getItem('artigo51'),
+document.querySelectorAll("td")[35].innerHTML = localStorage.getItem('tear52'),    
+document.querySelectorAll("td")[36].innerHTML = localStorage.getItem('artigo52'),
+document.querySelectorAll("td")[44].innerHTML =  localStorage.getItem('tear53'),    
+document.querySelectorAll("td")[45].innerHTML = localStorage.getItem('artigo53'),
+document.querySelectorAll("td")[53].innerHTML =  localStorage.getItem('tear54'),    
+document.querySelectorAll("td")[54].innerHTML = localStorage.getItem('artigo54'),
+document.querySelectorAll("td")[62].innerHTML =  localStorage.getItem('tear55'),    
+document.querySelectorAll("td")[63].innerHTML = localStorage.getItem('artigo55'),
+document.querySelectorAll("td")[71].innerHTML =  localStorage.getItem('tear56'),    
+document.querySelectorAll("td")[72].innerHTML = localStorage.getItem('artigo56'),
+document.querySelectorAll("td")[80].innerHTML =  localStorage.getItem('tear57'),    
+document.querySelectorAll("td")[81].innerHTML = localStorage.getItem('artigo57'),
+document.querySelectorAll("td")[89].innerHTML =  localStorage.getItem('tear58'),    
+document.querySelectorAll("td")[90].innerHTML = localStorage.getItem('artigo58'),
+document.querySelectorAll("td")[98].innerHTML =  localStorage.getItem('tear59'),    
+document.querySelectorAll("td")[99].innerHTML = localStorage.getItem('artigo59'),
+document.querySelectorAll("td")[107].innerHTML = localStorage.getItem('tear60'),     
+document.querySelectorAll("td")[108].innerHTML = localStorage.getItem('artigo60'),
+];
+arr5;
+var myArray5 = [];
+
+if (arr5[24] > 0) {myArray5.push(parseInt(arr5[24]))}
+if (arr5[25] > 0) {myArray5.push(parseInt(arr5[25]))}
+if (arr5[26] > 0) {myArray5.push(parseInt(arr5[26]))}
+if (arr5[27] > 0) {myArray5.push(parseInt(arr5[27]))}
+if (arr5[28] > 0) {myArray5.push(parseInt(arr5[28]))}
+if (arr5[29] > 0) {myArray5.push(parseInt(arr5[29]))}
+if (arr5[30] > 0) {myArray5.push(parseInt(arr5[30]))}
+if (arr5[31] > 0) {myArray5.push(parseInt(arr5[31]))}
+if (arr5[32] > 0) {myArray5.push(parseInt(arr5[32]))}
+if (arr5[33] > 0) {myArray5.push(parseInt(arr5[33]))}
+if (arr5[34] > 0) {myArray5.push(parseInt(arr5[34]))}
+if (arr5[35] > 0) {myArray5.push(parseInt(arr5[35]))}
+
+
+ document.getElementById('totalRpm5').innerHTML = mediaUm(myArray5).toFixed(0);
+// <!-- <!--===== 5º grupo ==============================================-->	 -->
+
+// <!-- ===== 6º grupo ============================================== -->
+var arr6 = [
+document.querySelectorAll("td")[135].innerHTML = localStorage.getItem('tear61'),    
+document.querySelectorAll("td")[136].innerHTML = localStorage.getItem('artigo61'),
+document.querySelectorAll("td")[144].innerHTML = localStorage.getItem('tear62'),      
+document.querySelectorAll("td")[145].innerHTML = localStorage.getItem('artigo62'),
+document.querySelectorAll("td")[153].innerHTML = localStorage.getItem('tear63'),      
+document.querySelectorAll("td")[154].innerHTML = localStorage.getItem('artigo63'),
+document.querySelectorAll("td")[162].innerHTML = localStorage.getItem('tear64'),      
+document.querySelectorAll("td")[163].innerHTML = localStorage.getItem('artigo64'),
+document.querySelectorAll("td")[171].innerHTML = localStorage.getItem('tear65'),      
+document.querySelectorAll("td")[172].innerHTML = localStorage.getItem('artigo65'),
+document.querySelectorAll("td")[180].innerHTML = localStorage.getItem('tear66'),      
+document.querySelectorAll("td")[181].innerHTML = localStorage.getItem('artigo66'),
+document.querySelectorAll("td")[189].innerHTML = localStorage.getItem('tear67'),      
+document.querySelectorAll("td")[190].innerHTML = localStorage.getItem('artigo67'),
+document.querySelectorAll("td")[198].innerHTML = localStorage.getItem('tear68'),      
+document.querySelectorAll("td")[199].innerHTML = localStorage.getItem('artigo68'),
+document.querySelectorAll("td")[207].innerHTML = localStorage.getItem('tear69'),      
+document.querySelectorAll("td")[208].innerHTML = localStorage.getItem('artigo69'),
+document.querySelectorAll("td")[216].innerHTML = localStorage.getItem('tear70'),      
+document.querySelectorAll("td")[217].innerHTML = localStorage.getItem('artigo70'),
+document.querySelectorAll("td")[225].innerHTML = localStorage.getItem('tear71'),      
+document.querySelectorAll("td")[226].innerHTML = localStorage.getItem('artigo71'),
+document.querySelectorAll("td")[234].innerHTML = localStorage.getItem('tear72'),     
+document.querySelectorAll("td")[235].innerHTML = localStorage.getItem('artigo72'),
+];
+arr6;
+var myArray6 = [];
+
+if (arr6[24] > 0) {myArray6.push(parseInt(arr6[24]))}
+if (arr6[25] > 0) {myArray6.push(parseInt(arr6[25]))}
+if (arr6[26] > 0) {myArray6.push(parseInt(arr6[26]))}
+if (arr6[27] > 0) {myArray6.push(parseInt(arr6[27]))}
+if (arr6[28] > 0) {myArray6.push(parseInt(arr6[28]))}
+if (arr6[29] > 0) {myArray6.push(parseInt(arr6[29]))}
+if (arr6[30] > 0) {myArray6.push(parseInt(arr6[30]))}
+if (arr6[31] > 0) {myArray6.push(parseInt(arr6[31]))}
+if (arr6[32] > 0) {myArray6.push(parseInt(arr6[32]))}
+if (arr6[33] > 0) {myArray6.push(parseInt(arr6[33]))}
+if (arr6[34] > 0) {myArray6.push(parseInt(arr6[34]))}
+if (arr6[35] > 0) {myArray6.push(parseInt(arr6[35]))}
+
+
+ document.getElementById('totalRpm6').innerHTML = mediaUm(myArray6).toFixed(0);
+// <!-- <!--===== 6º grupo ==============================================-->	 -->
+
+// <!-- ===== 7º grupo ============================================== -->
+var arr7 = [
+document.querySelectorAll("td")[256].innerHTML = localStorage.getItem('tear73'),    
+document.querySelectorAll("td")[257].innerHTML = localStorage.getItem('artigo73'),
+document.querySelectorAll("td")[265].innerHTML = localStorage.getItem('tear74'),      
+document.querySelectorAll("td")[266].innerHTML = localStorage.getItem('artigo74'),
+document.querySelectorAll("td")[274].innerHTML = localStorage.getItem('tear75'),      
+document.querySelectorAll("td")[275].innerHTML = localStorage.getItem('artigo75'),
+document.querySelectorAll("td")[283].innerHTML = localStorage.getItem('tear76'),      
+document.querySelectorAll("td")[284].innerHTML = localStorage.getItem('artigo76'),
+document.querySelectorAll("td")[292].innerHTML = localStorage.getItem('tear77'),      
+document.querySelectorAll("td")[293].innerHTML = localStorage.getItem('artigo77'),
+document.querySelectorAll("td")[301].innerHTML = localStorage.getItem('tear78'),      
+document.querySelectorAll("td")[302].innerHTML = localStorage.getItem('artigo78'),
+document.querySelectorAll("td")[259].innerHTML = localStorage.getItem('tear79'),      
+document.querySelectorAll("td")[260].innerHTML = localStorage.getItem('artigo79'),
+document.querySelectorAll("td")[268].innerHTML = localStorage.getItem('tear80'),      
+document.querySelectorAll("td")[269].innerHTML = localStorage.getItem('artigo80'),
+document.querySelectorAll("td")[277].innerHTML = localStorage.getItem('tear81'),      
+document.querySelectorAll("td")[278].innerHTML = localStorage.getItem('artigo81'),
+document.querySelectorAll("td")[286].innerHTML = localStorage.getItem('tear82'),      
+document.querySelectorAll("td")[287].innerHTML = localStorage.getItem('artigo82'),
+document.querySelectorAll("td")[295].innerHTML = localStorage.getItem('tear83'),      
+document.querySelectorAll("td")[296].innerHTML = localStorage.getItem('artigo83'),
+document.querySelectorAll("td")[304].innerHTML = localStorage.getItem('tear84'),     
+document.querySelectorAll("td")[305].innerHTML = localStorage.getItem('artigo84'),
+];
+arr7;
+var myArray7 = [];
+
+if (arr7[24] > 0) {myArray7.push(parseInt(arr7[24]))}
+if (arr7[25] > 0) {myArray7.push(parseInt(arr7[25]))}
+if (arr7[26] > 0) {myArray7.push(parseInt(arr7[26]))}
+if (arr7[27] > 0) {myArray7.push(parseInt(arr7[27]))}
+if (arr7[28] > 0) {myArray7.push(parseInt(arr7[28]))}
+if (arr7[29] > 0) {myArray7.push(parseInt(arr7[29]))}
+if (arr7[30] > 0) {myArray7.push(parseInt(arr7[30]))}
+if (arr7[31] > 0) {myArray7.push(parseInt(arr7[31]))}
+if (arr7[32] > 0) {myArray7.push(parseInt(arr7[32]))}
+if (arr7[33] > 0) {myArray7.push(parseInt(arr7[33]))}
+if (arr7[34] > 0) {myArray7.push(parseInt(arr7[34]))}
+if (arr7[35] > 0) {myArray7.push(parseInt(arr7[35]))}
+
+
+ document.getElementById('totalRpm7').innerHTML = mediaUm(myArray7).toFixed(0);
+// <!-- <!--===== 7º grupo ==============================================-->	 -->
+
+// <!-- ===== 8º grupo ============================================== -->
+var arr8 = [
+document.querySelectorAll("td")[262].innerHTML = localStorage.getItem('tear85'), 
+document.querySelectorAll("td")[263].innerHTML = localStorage.getItem('artigo85'),
+document.querySelectorAll("td")[271].innerHTML = localStorage.getItem('tear86'), 
+document.querySelectorAll("td")[272].innerHTML = localStorage.getItem('artigo86'),
+document.querySelectorAll("td")[280].innerHTML = localStorage.getItem('tear87'),  
+document.querySelectorAll("td")[281].innerHTML = localStorage.getItem('artigo87'),
+document.querySelectorAll("td")[289].innerHTML = localStorage.getItem('tear88'),  
+document.querySelectorAll("td")[290].innerHTML = localStorage.getItem('artigo88'),
+document.querySelectorAll("td")[298].innerHTML = localStorage.getItem('tear89'),  
+document.querySelectorAll("td")[299].innerHTML = localStorage.getItem('artigo89'), 
+];
+arr8;
+var myArray8 = [];
+ 
+if (arr8[24] > 0) {myArray8.push(parseInt(arr8[24]))}
+if (arr8[25] > 0) {myArray8.push(parseInt(arr8[25]))}
+if (arr8[26] > 0) {myArray8.push(parseInt(arr8[26]))}
+if (arr8[27] > 0) {myArray8.push(parseInt(arr8[27]))}
+if (arr8[28] > 0) {myArray8.push(parseInt(arr8[28]))}
+if (arr8[29] > 0) {myArray8.push(parseInt(arr8[29]))}
+if (arr8[30] > 0) {myArray8.push(parseInt(arr8[30]))}
+if (arr8[31] > 0) {myArray8.push(parseInt(arr8[31]))}
+if (arr8[32] > 0) {myArray8.push(parseInt(arr8[32]))}
+if (arr8[33] > 0) {myArray8.push(parseInt(arr8[33]))}
+if (arr8[34] > 0) {myArray8.push(parseInt(arr8[34]))}
+if (arr8[35] > 0) {myArray8.push(parseInt(arr8[35]))}
+
+
+ document.getElementById('totalRpm8').innerHTML = mediaUm(myArray8).toFixed(0);
+//<!--===== 8º grupo ==============================================-->
+}
+</script>
+
+</body>
+</html> 
